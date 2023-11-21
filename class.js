@@ -14,8 +14,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var BankAccount = /** @class */ (function () {
-    function BankAccount() {
-        this.balanceInit = 0;
+    function BankAccount(_balanceInit) {
+        this.balanceInit = _balanceInit;
     }
     BankAccount.prototype.deposit = function (amount) {
         this.balanceInit += amount;
@@ -25,7 +25,7 @@ var BankAccount = /** @class */ (function () {
             this.balanceInit -= amount;
         }
         else {
-            console.log("fondi insufficienti");
+            console.log("Fondi insufficienti");
         }
     };
     return BankAccount;
@@ -35,10 +35,10 @@ var SonAccount = /** @class */ (function (_super) {
     function SonAccount() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    SonAccount.prototype.deposit = function (amount) {
+    SonAccount.prototype.depositToSon = function (amount) {
         this.deposit(amount);
     };
-    SonAccount.prototype.getMoney = function (amount) {
+    SonAccount.prototype.withdrawFromSon = function (amount) {
         this.getMoney(amount);
     };
     return SonAccount;
@@ -54,6 +54,12 @@ var MotherAccount = /** @class */ (function (_super) {
     };
     return MotherAccount;
 }(BankAccount));
-var soAccount = new SonAccount();
-soAccount.deposit(100);
-soAccount.getMoney(120);
+var sonAccount = new SonAccount(500);
+sonAccount.deposit(400);
+console.log(sonAccount.balanceInit);
+sonAccount.getMoney(80);
+console.log("Saldo del conto figlio:", sonAccount.balanceInit);
+var motherAccount = new MotherAccount(0);
+motherAccount.deposit(600);
+motherAccount.addInterest();
+console.log("Saldo del conto madre dopo l'aggiunta di interesse:", motherAccount.balanceInit);

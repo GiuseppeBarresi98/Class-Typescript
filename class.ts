@@ -1,5 +1,8 @@
 class BankAccount {
-  balanceInit: number = 0;
+  balanceInit: number;
+  constructor(_balanceInit: number) {
+    this.balanceInit = _balanceInit;
+  }
 
   deposit(amount: number): void {
     this.balanceInit += amount;
@@ -31,14 +34,15 @@ class MotherAccount extends BankAccount {
   }
 }
 
-const sonAccount = new SonAccount();
-sonAccount.depositToSon(100);
+const sonAccount = new SonAccount(500);
+sonAccount.deposit(400);
+console.log(sonAccount.balanceInit);
 
-sonAccount.withdrawFromSon(120);
+sonAccount.getMoney(80);
 console.log("Saldo del conto figlio:", sonAccount.balanceInit);
 
-const motherAccount = new MotherAccount();
-motherAccount.deposit(500);
+const motherAccount = new MotherAccount(0);
+motherAccount.deposit(600);
 motherAccount.addInterest();
 console.log(
   "Saldo del conto madre dopo l'aggiunta di interesse:",
